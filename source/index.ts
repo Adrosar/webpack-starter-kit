@@ -14,7 +14,10 @@ let boo: Boo = new Boo("Boo");
 console.log("> Foo:", foo.getName());
 console.log("> Boo:", boo.getName());
 
-loadLib((lib: Lib) => {
-    lib.print("Hello World :)");
-    $("body").append($("<h1>Hello World :)</h1>"));
-});
+setTimeout(() => {
+    // Przykład pokazujący jak funkcja `loadLib` ładuje plik `lib.js` w chwili jej wywołania.
+    loadLib((lib: Lib) => {
+        lib.print("Hello World :)");
+        $("body").append($("<h1>Hello World :)</h1>"));
+    });
+}, 3000);
