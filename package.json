@@ -7,7 +7,8 @@
     "build": "node bin/build.js",
     "distribute": "node bin/distribute.js",
     "server": "node bin/server.js",
-    "watch": "node bin/watch.js"
+    "watch": "node bin/watch.js",
+    "test": "node bin/test.js"
   },
   "keywords": [
     "webpack",
@@ -18,7 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/jquery": "^2.0.48",
-    "express": "^4.15.5"
+    "express": "^4.15.5",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

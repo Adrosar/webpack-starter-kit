@@ -21,3 +21,21 @@ setTimeout(() => {
         $("body").append($("<h1>Hello World :)</h1>"));
     });
 }, 3000);
+
+
+
+// Wystawianie (udostępnianie) biblioteki na zewnątrz, jako dziecko obiektu `window`:
+
+const LIB_NAMEs = ["__shared"];
+const LIB: any = {
+    "Boo": Boo,
+    "Foo": Foo
+}
+
+for (let i = 0; i < LIB_NAMEs.length; i++) {
+    let name: string = LIB_NAMEs[i];
+
+    if (typeof (<any>window)[name] !== "object") {
+        (<any>window)[name] = LIB;
+    }
+}

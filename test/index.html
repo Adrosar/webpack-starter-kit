@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Unit tests</title>
+</head>
+
+<body>
+    <!-- Aplikacja: -->
+    <script type="text/javascript" src="assets/jquery/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="app/index.js"></script>
+
+    <!-- Narzędzie a wspomogające testowanie: -->
+    <script type="text/javascript" src="assets/chai/chai-4.1.2.js"></script>
+
+    <!-- TESTY:
+        Testowaniu podlegają skompilowane pliki JavaScript (z katalogu "build").
+        Bezpośrednie testowanie plików z katalogu "source", może nie wykazać błędów lub niezgodności,
+        które powstają w wyniku działania narzędzi: webpak, tsc, babel.
+		Aby pliki *.spec.js mogły testować aplikacje/bibliotekę musi ona udostępniać metody i klasy na zewnątrz
+		do obiektu `window`. Na przykład przez obiekt `window.__shared`.
+    -->
+    <script type="text/javascript" src="spec/boo.spec.js"></script>
+    <script type="text/javascript" src="spec/foo.spec.js"></script>
+</body>
+
+</html>

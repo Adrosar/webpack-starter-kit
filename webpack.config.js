@@ -10,12 +10,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 // Foldery:
 const dir = {
-    source: path.join(__dirname, 'source'),
-    build: path.join(__dirname, 'build'),
-    dist: path.join(__dirname, 'dist'),
-    assets: path.join(__dirname, 'assets'),
-    nm: path.join(__dirname, 'node_modules'),
-    bc: path.join(__dirname, 'bower_components')
+    source: path.resolve(__dirname, 'source'),
+    build: path.resolve(__dirname, 'build'),
+    dist: path.resolve(__dirname, 'dist'),
+    assets: path.resolve(__dirname, 'assets'),
+    nm: path.resolve(__dirname, 'node_modules'),
+    bc: path.resolve(__dirname, 'bower_components')
 }
 
 
@@ -388,9 +388,6 @@ if (ENVAR.ENV === "PROD") {
         logLevel: 'info'
     }));
 
-    // Budowanie wersji do dystrybucji:
-    // (po zoptymalizowaniu aplikacji - patrz wyżej ^^)
-
     // Wtyczka `WebpackOnBuildPlugin` uruchamia funkcję zwrotną (callback) po tym jak `webpack` zbuduje aplikacje:
     // - https://github.com/kossnocorp/on-build-webpack
     webpackConfig.plugins.push(new WebpackOnBuildPlugin(function (stats) {
@@ -414,11 +411,7 @@ if (ENVAR.ENV === "PROD") {
 }
 
 
-// Czynności wykonywane jednorazowo po uruchomieniu jednego z plików:
-// - `build.sh`
-// - `watch.sh`
-// - `distribute.sh`
-// a przed zbudowaniem aplikacji przez Webpack'a.
+// Czynności wykonywane jednorazowo przed zbudowaniem aplikacji przez Webpack'a:
 
 // 1) Czyszczę pliki i foldery z katalogu "build":
 fse.emptyDirSync(dir.build);
