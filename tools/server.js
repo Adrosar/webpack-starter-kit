@@ -30,16 +30,13 @@ const staticOptions = {
 };
 
 app.use('/', express.static(dir.build, staticOptions));
+app.use('/', express.static(dir.assets, staticOptions));
 app.use('/', express.static(dir.web, staticOptions));
 app.use('/', express.static(dir.test, staticOptions));
 
 app.use('/', serveIndex(dir.web, {
     'icons': true
 }));
-
-app.use('/assets', express.static(dir.assets, staticOptions));
-app.use('/assets', express.static(dir.bc, staticOptions));
-app.use('/assets', express.static(dir.nw, staticOptions));
 
 app.all('/runTest.html', function (req, res, next) {
     res.sendFile(path.resolve(dir.test, 'index.html'));
