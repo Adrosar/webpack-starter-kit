@@ -1,3 +1,4 @@
+
 ## Instalacja
 
 1. Zainstaluj **Node.js**. Zalecam wersję: _LTS v6.11.3 (includes npm 3.10.10)_ lub **najnowszą**.
@@ -36,7 +37,7 @@ Przykład _(terminal BASH)_:
 
 Foldery _(katalogii)_:
 
-- `./assets` - Zasoby aplikacji, które **NIE** podlegają budowaniu _(kompilacji)_.
+- `./assets` - Zasoby aplikacji, które **NIE** podlegają budowaniu _(kompilacji)_. Zawartość folderu `./assets` jest kopiowana do folderu `./dist` podczas dystrybucji aplikacji.
 - `./bin` - Skrypty **ZADAŃ**.
 - `./build` - Zbudowana _(skompilowana)_ aplikacja.
 - `./dist` - Pliki gotowe do dystrybucjii.
