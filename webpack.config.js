@@ -130,8 +130,23 @@ const skeletonLoaderObject = {
 }
 
 
+// Przypisanie ustawień `css-loader` do stałej: 
+// - https://github.com/webpack-contrib/css-loader
+const cssLoaderObject = {
+    loader: "css-loader",
+    options: {
+        url: false,
+        import: true
+    }
+}
+
+
 // Wyodrębnione pliki przy pomocy wtyczki `ExtractTextPlugin`:
-const extractCSS = new ExtractTextPlugin('[name].css');
+const extractCSS = new ExtractTextPlugin({
+    filename: (getPath) => {
+        return getPath("[name].css").replace(/\/\w+\.css$/i, "/style.css");
+    }
+});
 
 
 // Konfiguracja dla Webpack 2.x
@@ -144,7 +159,7 @@ var webpackConfig = {
     output: {
         path: dir.build,
         filename: "[name].js",
-        chunkFilename: 'app/[name].js',// <- Wykorzystywane przez 'bundle-loader'.
+        chunkFilename: '[name].js',// <- Wykorzystywane przez 'bundle-loader'.
         publicPath: ""
     },
     module: {
@@ -228,7 +243,7 @@ var webpackConfig = {
                         test: /\.css$/,
                         use: extractCSS.extract({
                             fallback: "style-loader",
-                            use: "css-loader"
+                            use: [cssLoaderObject]
                         }),
                     },
                     {
@@ -237,7 +252,12 @@ var webpackConfig = {
                         test: /\.sass$/,
                         use: extractCSS.extract({
                             fallback: "style-loader",
-                            use: "css-loader!sass-loader?outputStyle=expanded&indentedSyntax"
+                            use: [
+                                cssLoaderObject,
+                                {
+                                    loader: "sass-loader?outputStyle=expanded&indentedSyntax"
+                                }
+                            ]
                         })
                     },
                     {
@@ -245,7 +265,12 @@ var webpackConfig = {
                         test: /\.scss$/,
                         use: extractCSS.extract({
                             fallback: "style-loader",
-                            use: "css-loader!sass-loader?outputStyle=expanded"
+                            use: [
+                                cssLoaderObject,
+                                {
+                                    loader: "sass-loader?outputStyle=expanded"
+                                }
+                            ]
                         })
                     },
                     {
@@ -254,7 +279,12 @@ var webpackConfig = {
                         test: /\.less$/,
                         use: extractCSS.extract({
                             fallback: "style-loader",
-                            use: "css-loader!less-loader"
+                            use: [
+                                cssLoaderObject,
+                                {
+                                    loader: "less-loader"
+                                }
+                            ]
                         })
                     },
                     {
@@ -399,9 +429,9 @@ if (ENVAR.ENV === "PROD") {
             throw err;
         }
 
-        // 2) Kopiowanie plików z katalogu `assets` do katalogu `dist/assets`:
+        // 2) Kopiowanie plików z katalogu `assets` do katalogu `dist`:
         try {
-            fse.copySync(dir.assets, path.join(dir.dist, 'assets'));
+            fse.copySync(dir.assets, dir.dist);
         } catch (err) {
             throw err;
         }
