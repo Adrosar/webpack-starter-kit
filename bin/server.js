@@ -1,7 +1,7 @@
 
 const path = require('path');
-const projectDir = path.resolve(__dirname, "..");
-const serverExec = path.resolve(projectDir, "tools", "server.js");
-process.chdir(projectDir);
+const dir = require('../lib/directories.js');
+const serverExec = path.resolve(dir.root, "lib", "server.js");
+process.chdir(dir.root);
 process.env["DEBUG"] = "express:*";
 require(serverExec);

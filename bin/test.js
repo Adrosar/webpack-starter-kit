@@ -1,16 +1,15 @@
 
 const path = require('path');
 const cp = require('child_process');
-
-const projectDir = path.resolve(__dirname, "..");
-const testPhantomJS = path.resolve(projectDir, "test", "phantom.js")
+const dir = require('../lib/directories.js');
+const testPhantomJS = path.resolve(dir.root, "test", "phantom.js")
 const command = `phantomjs "${testPhantomJS}" "http://127.0.0.1:8080/runTest.html"`;
 
 console.log(`\n### Run TEST in PhantomJS`);
 console.log(`$> ${command}\n`);
 
 cp.exec(command, {
-    cwd: projectDir
+    cwd: dir.root
 }, function (error, stdout, stderr) {
     if (!!error) {
         throw error;
@@ -25,4 +24,4 @@ cp.exec(command, {
     if (!!stderr) {
         console.log(stderr);
     }
-})
+});
