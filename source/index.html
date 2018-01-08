@@ -5,22 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="app/style.css">
+
+    <!-- @if ENV="DEV" -->
+    <link rel="stylesheet" href="app/main.css">
+    <!-- @endif -->
+
+    <!-- @if ENV="PROD" -->
+    <link rel="stylesheet" href="app/main.min.css">
+    <!-- @endif -->
+
     <title>Webpack Starter-KIT</title>
 </head>
 
 <body>
     <div>Hello World :)</div>
 
-    <!-- @if ENV='DEV' -->
+    <!-- @if ENV="DEV" -->
     <script type="text/javascript" src="jquery/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="app/main.js"></script>
     <!-- @endif -->
 
-    <!-- @if ENV='PROD' -->
+    <!-- @if ENV="PROD" -->
     <script type="text/javascript" src="jquery/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="app/main.min.js"></script>
     <!-- @endif -->
-
-    <script type="text/javascript" src="app/index.js"></script>
 </body>
 
 </html>
