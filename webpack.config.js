@@ -173,7 +173,7 @@ var webpackConfig = {
                     use: [{
                             loader: 'file-loader',
                             options: {
-                                name: "[name].[ext]"
+                                name: nameResolve('[name]', '[ext]')
                             }
                         },
                         uglifyLoaderObject,
@@ -312,7 +312,8 @@ var webpackConfig = {
                     use: [{
                             loader: 'file-loader',
                             options: {
-                                name: nameResolve('[name]', 'html')
+                                name: "[path]" + nameResolve('[name]', 'html'),
+                                context: dir.source
                             }
                         },
                         {
