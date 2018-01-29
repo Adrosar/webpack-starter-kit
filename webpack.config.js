@@ -239,6 +239,7 @@ var webpackConfig = {
                         fallback: "style-loader",
                         use: [
                             cssLoaderObject,
+                            postcssLoaderObject,
                             {
                                 loader: "sass-loader?outputStyle=expanded&indentedSyntax"
                             }
@@ -252,6 +253,7 @@ var webpackConfig = {
                         fallback: "style-loader",
                         use: [
                             cssLoaderObject,
+                            postcssLoaderObject,
                             {
                                 loader: "sass-loader?outputStyle=expanded"
                             }
@@ -266,6 +268,7 @@ var webpackConfig = {
                         fallback: "style-loader",
                         use: [
                             cssLoaderObject,
+                            postcssLoaderObject,
                             {
                                 loader: "less-loader"
                             }
