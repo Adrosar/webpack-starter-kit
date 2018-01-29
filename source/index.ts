@@ -5,7 +5,6 @@ require("./style.css");
 import { Foo } from "./foo";
 import { Boo } from "./boo";
 
-import { Lib } from "./lib.d";
 const loadLib: BundleLoaderFunction = require("bundle-loader?lazy&name=app/lib!./lib.ts");
 
 let foo: Foo = new Foo();
