@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const WebpackOnBuildPlugin = require('on-build-webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const autoprefixer = require('autoprefixer');
 
 // Foldery:
 const dir = require('./lib/directories.js');
@@ -121,6 +122,25 @@ const cssLoaderObject = {
 }
 
 
+// Przypisanie ustawień `postcss-loader` do stałej: 
+// - https://github.com/postcss/postcss-loader
+const postcssLoaderObject = {
+    loader: "postcss-loader",
+    options: {
+        ident: 'postcss',
+        plugins: (loader) => [
+            // Wtyczka "Autoprefixer" dla narzędzia "PostCSS":
+            // - https://github.com/postcss/autoprefixer
+            autoprefixer({
+                // Biblioteka "Browserslist" używana we wtyczce "Autoprefixer":
+                // - https://github.com/ai/browserslist#queries
+                browsers: ["last 2 versions", "last 5 Chrome versions", "Firefox ESR", "last 2 major versions"]
+            })
+        ]
+    }
+}
+
+
 // Wyodrębnione pliki przy pomocy wtyczki `ExtractTextPlugin`:
 const extractCSS = new ExtractTextPlugin({
     filename: (getPath) => {
@@ -208,7 +228,7 @@ var webpackConfig = {
                     test: /\.css$/,
                     use: extractCSS.extract({
                         fallback: "style-loader",
-                        use: [cssLoaderObject]
+                        use: [cssLoaderObject, postcssLoaderObject]
                     }),
                 },
                 {
