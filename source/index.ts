@@ -2,9 +2,16 @@
 require("./index.html");
 require("./style.css");
 
+// Importuję polyfill dla `Promise` do globalnej przestrzeni nazw:
+// - https://github.com/zloirock/core-js
+import 'core-js/fn/promise';
+// // Polecam się również zapoznać z https://babeljs.io/docs/usage/polyfill
+
 import { Foo } from "./foo";
 import { Boo } from "./boo";
 
+// Wykorzystuję `bundle-loader` do dynamicznego ładowania pliku `lib.js`:
+// - https://github.com/webpack-contrib/bundle-loader
 const loadLib: BundleLoaderFunction = require("bundle-loader?lazy&name=app/lib!./lib.ts");
 
 let foo: Foo = new Foo();
