@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path');
 const dir = require('../lib/directories.js');
 const webpackExec = path.resolve(dir.root, "node_modules", "webpack", "bin", "webpack.js");
