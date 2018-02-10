@@ -1,12 +1,16 @@
 
 export class Boo {
-    private _name: string
+    private _name: string | null
 
-    constructor(name: string = null) {
-        this._name = name;
+    constructor(name?: string) {
+        if (!!name) {
+            this._name = name
+        } else {
+            this._name = null;
+        }
     }
 
-    public getName(): string {
+    public getName(): string | null {
         return this._name;
     }
 }
