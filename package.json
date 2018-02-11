@@ -4,14 +4,14 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "node bin/build.js",
-    "clear": "node bin/clear.js",
-    "copy": "node bin/copy.js",
-    "distribute": "node bin/distribute.js",
-    "minimize": "node bin/minimize.js",
-    "server": "node bin/server.js",
-    "watch": "node bin/watch.js",
-    "test": "node bin/test.js"
+    "build": "webpack --display-chunks --env.ENV=DEV --env.DEBUG=0",
+    "minimize": "webpack --display-chunks --optimize-minimize --env.ENV=PROD --env.DEBUG=0",
+    "watch": "webpack --display-chunks --watch --cache --env.ENV=DEV --env.DEBUG=1",
+    "server": "node lib/server.js",
+    "clear": "node lib/clear.js",
+    "copy": "node lib/copy.js",
+    "test": "node lib/test.js",
+    "distribute": "node lib/clear.js && webpack --display-chunks --env.ENV=DEV --env.DEBUG=0 && webpack --display-chunks --optimize-minimize --env.ENV=PROD --env.DEBUG=0 && node lib/copy.js"
   },
   "keywords": [
     "webpack",
