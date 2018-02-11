@@ -1,5 +1,4 @@
 
-require("./index.html");
 require("./style.css");
 
 // Importuję polyfill dla `Promise` do globalnej przestrzeni nazw:

@@ -7,19 +7,19 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const autoprefixer = require('autoprefixer');
 
+// Biblioteki własne:
+const dir = require('./lib/directories.js');
+const mergeEnv = require('./lib/mergeEnv.js');
+const nameResolve = require('./lib/nameResolve.js');
+
 function webpackConfigFactory(webpackEnv) {
-    // Foldery:
-    const dir = require('./lib/directories.js');
 
     // Odczyt i interpretacja zmiennych środowiskowych:
-    const mergeEnv = require('./lib/mergeEnv.js');
     const ENVAR = mergeEnv({
-        ENV: "DEV",
-        DEBUG: false
+        ENV: "DEV", // DEV, PROD, TEST
+        DEBUG: false, // true, false
+        MIN: 0 // 0, 1, 2
     }, process.env, webpackEnv);
-
-    // Dzięki tej funkcji do nazwy jest dodawane słowo "min", np: "app.min.js" dla wersji produkcyjnej:
-    const nameResolve = require('./lib/nameResolve.js');
 
 
     // rzypisanie ustawień `preprocess-loader` do stałej:
@@ -33,7 +33,7 @@ function webpackConfigFactory(webpackEnv) {
     // Uruchomienie `html-minify-loader` w zależności od środowiska:
     var htmlMinifyLoaderStr;
 
-    if (ENVAR.ENV === "PROD") {
+    if (ENVAR.MIN > 0) {
         htmlMinifyLoaderStr = 'html-minify-loader';
     } else {
         // https://github.com/alex-shnayder/do-nothing-loader
@@ -69,7 +69,7 @@ function webpackConfigFactory(webpackEnv) {
     // - https://github.com/bestander/uglify-loader
     var uglifyLoaderObject;
 
-    if (ENVAR.ENV === "PROD") {
+    if (ENVAR.MIN > 0) {
         uglifyLoaderObject = {
             loader: 'uglify-loader',
             options: {
@@ -156,10 +156,10 @@ function webpackConfigFactory(webpackEnv) {
 
     // Konfiguracja dla Webpack'a:
     // - dokumentacja https://webpack.js.org/configuration/
-    var webpackConfig = {
+    const webpackConfig = {
         context: dir.source,
         entry: {
-            'app/main': './index.ts'
+            "app/main": "./index-app.ts"
         },
         output: {
             path: dir.build,
@@ -299,50 +299,32 @@ function webpackConfigFactory(webpackEnv) {
                         loader: 'xml-loader'
                     },
                     {
+                        // Kopiowanie plików HTML nie będących szablonami:
+                        test: /\.html$/,
+                        include: [path.resolve(dir.source, 'html')], // <- lista dodatkowych reguł, które muszą zostać spełnione
+                        use: [{
+                                loader: 'file-loader',
+                                options: {
+                                    name: nameResolve('[name]', 'html', ENVAR),
+                                    context: dir.source
+                                }
+                            },
+                            {
+                                loader: htmlMinifyLoaderStr
+                            },
+                            {
+                                loader: preprocessLoaderStr
+                            }
+                        ]
+                    },
+                    {
                         // Wczytuję pliki html i mustache jako surowe dane.
                         // Są one przypisywane do zmiennej.
                         // Przykład użycia: `var data = require("index.html")`
                         // - https://github.com/webpack-contrib/raw-loader
                         test: /\.(html|mustache)?/,
-                        include: [path.resolve(dir.source, "templates")],
                         use: [{
                                 loader: 'raw-loader'
-                            },
-                            {
-                                loader: htmlMinifyLoaderStr
-                            },
-                            {
-                                loader: preprocessLoaderStr
-                            }
-                        ]
-                    },
-                    {
-                        test: /\.tpl\.\w*$/,
-                        use: [{
-                                loader: 'raw-loader'
-                            },
-                            {
-                                loader: htmlMinifyLoaderStr
-                            },
-                            {
-                                loader: preprocessLoaderStr
-                            }
-                        ]
-                    },
-                    {
-                        // Kopiowanie plików HTML nie będących szablonami:
-                        test: /\.html$/,
-                        include: [path.resolve(dir.source)], // <- lista dodatkowych reguł, które muszą zostać spełnione
-                        exclude: [
-                            path.resolve(dir.source, "templates"),
-                            /\.tpl\.\w*$/
-                        ], // <- lista dodatkowych reguł, które NIE mogą zostać spełnione
-                        use: [{
-                                loader: 'file-loader',
-                                options: {
-                                    name: "[path]" + nameResolve('[name]', 'html', ENVAR),
-                                    context: dir.source
-                                }
                             },
                             {
                                 loader: htmlMinifyLoaderStr
@@ -365,8 +347,21 @@ function webpackConfigFactory(webpackEnv) {
     }
 
 
-    // Optymalizacja i minimalizacja kodu:
+    // Dla środowiska produkcyjnego ustawiam wyjściowy katalog na `/dist`:
     if (ENVAR.ENV === "PROD") {
+        webpackConfig.output.path = dir.dist
+    }
+
+    // Dla środowiska testowego ustawiam jako plik wejścia, plik z testami jednostkowymi:
+    if (ENVAR.ENV === "TEST") {
+        webpackConfig.entry = {
+            "test/main": "./index-test.ts"
+        }
+    }
+
+
+    // Optymalizacja i minimalizacja kodu:
+    if (ENVAR.MIN > 0) {
         // Dodaję wtyczkę `NoErrorsPlugin`:
         webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
 
