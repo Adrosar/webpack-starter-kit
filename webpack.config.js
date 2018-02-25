@@ -84,38 +84,6 @@ function webpackConfigFactory(webpackEnv) {
     }
 
 
-    // Przypisanie ustawień `skeleton-loader` do stałej: 
-    // - https://github.com/anseki/skeleton-loader
-    const skeletonLoaderObject = {
-        loader: 'skeleton-loader',
-        options: {
-            procedure: function (content) {
-
-                // Każda linia która kończy się poleceniem `//@DEL` zostaje usunięta
-                content = ("" + content).replace(/.+\/\/@DEL/gm, "");
-
-                if (ENVAR.ENV === "DEV") {
-                    // Składnia: `//@DEV xyz` wstawia do kodu `xyz` dla wersji DEV.
-                    content = ("" + content).replace(/\/\/@DEV\s+(.+)/gm, "$1");
-                }
-
-                if (ENVAR.ENV === "PROD") {
-                    // Składnia: `//@PROD xyz` wstawia do kodu `xyz` dla wersji PROD.
-                    content = ("" + content).replace(/\/\/@PROD\s+(.+)/gm, "$1");
-                }
-
-                if (ENVAR.DEBUG === true) {
-                    // Składnia: `//@DEBUG xyz` wstawia do kodu `xyz`,
-                    // jeżeli zmienna środowiskowa `DEBUG` jest ustawiona na `true`.
-                    content = ("" + content).replace(/\/\/@DEBUG\s+(.+)/gm, "$1");
-                }
-
-                return content;
-            }
-        }
-    }
-
-
     // Przypisanie ustawień `css-loader` do stałej: 
     // - https://github.com/webpack-contrib/css-loader
     const cssLoaderObject = {
@@ -159,7 +127,9 @@ function webpackConfigFactory(webpackEnv) {
     const webpackConfig = {
         context: dir.source,
         entry: {
-            "app/main": "./index-app.ts"
+            "app/album-1": "./entry/album-1.ts",
+            "app/album-2": "./entry/album-2.ts",
+            "app/album-3": "./entry/album-3.ts"
         },
         output: {
             path: dir.build,
@@ -188,8 +158,7 @@ function webpackConfigFactory(webpackEnv) {
                             uglifyLoaderObject,
                             babelLoaderObject,
                             tsLoaderObject,
-                            preprocessLoaderObject,
-                            skeletonLoaderObject
+                            preprocessLoaderObject
                         ]
                     },
                     {
@@ -202,8 +171,7 @@ function webpackConfigFactory(webpackEnv) {
                                 }
                             },
                             uglifyLoaderObject,
-                            preprocessLoaderObject,
-                            skeletonLoaderObject
+                            preprocessLoaderObject
                         ],
                     },
                     {
@@ -214,8 +182,7 @@ function webpackConfigFactory(webpackEnv) {
                             },
                             uglifyLoaderObject,
                             babelLoaderObject,
-                            preprocessLoaderObject,
-                            skeletonLoaderObject
+                            preprocessLoaderObject
                         ]
                     },
                     {
@@ -224,8 +191,7 @@ function webpackConfigFactory(webpackEnv) {
                         use: [
                             uglifyLoaderObject,
                             babelLoaderObject,
-                            preprocessLoaderObject,
-                            skeletonLoaderObject
+                            preprocessLoaderObject
                         ],
                     },
                     {
@@ -318,11 +284,11 @@ function webpackConfigFactory(webpackEnv) {
                         ]
                     },
                     {
-                        // Wczytuję pliki html i mustache jako surowe dane.
+                        // Wczytuję pliki jako surowe dane.
                         // Są one przypisywane do zmiennej.
                         // Przykład użycia: `var data = require("index.html")`
                         // - https://github.com/webpack-contrib/raw-loader
-                        test: /\.(html|mustache)?/,
+                        test: /\.(html|mustache|handlebars)?/,
                         use: [{
                                 loader: 'raw-loader'
                             },
@@ -339,10 +305,14 @@ function webpackConfigFactory(webpackEnv) {
         },
         resolve: {
             modules: [dir.source, dir.nm, dir.bc],
-            extensions: [".tsx", ".ts", ".es6.js", ".es5.js", ".js", ".css", ".sass", ".scss", ".json", ".xml"]
+            extensions: [".tsx", ".ts", ".es6.js", ".es5.js", ".js", ".css", ".sass", ".scss", ".json", ".xml", ".html"]
         },
         plugins: [
-            extractCSS
+            extractCSS,
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "app/commons",
+                chunks: ["app/album-1", "app/album-2", "app/album-3"]
+            })
         ]
     }
 
@@ -355,7 +325,7 @@ function webpackConfigFactory(webpackEnv) {
     // Dla środowiska testowego ustawiam jako plik wejścia, plik z testami jednostkowymi:
     if (ENVAR.ENV === "TEST") {
         webpackConfig.entry = {
-            "test/main": "./index-test.ts"
+            "test": "./test/index.ts"
         }
     }
 

@@ -1,16 +1,18 @@
 {
   "name": "webpack-starter-kit",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "",
   "main": "",
   "scripts": {
     "build": "node lib/clear.js --build && webpack --display-chunks --env.MIN=0 --env.ENV=DEV --env.DEBUG=0",
     "minimize": "node lib/clear.js --build && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=DEV --env.DEBUG=0",
     "watch": "node lib/clear.js --build && webpack --display-chunks --watch --cache --env.MIN=0 --env.ENV=DEV --env.DEBUG=1",
-    "server": "node lib/server.js",
     "clear": "node lib/clear.js --all",
     "test": "node lib/clear.js --build && webpack --display-chunks --env.MIN=1 --env.ENV=TEST --env.DEBUG=0",
-    "distribute": "node lib/clear.js --dist && webpack --display-chunks --env.MIN=0 --env.ENV=PROD --env.DEBUG=0 && webpack --display-chunks --optimize-minimize --env.MIN=2 --env.ENV=PROD --env.DEBUG=0 && node lib/copy.js --assets"
+    "distribute": "node lib/clear.js --dist && webpack --display-chunks --env.MIN=0 --env.ENV=PROD --env.DEBUG=0 && webpack --display-chunks --optimize-minimize --env.MIN=2 --env.ENV=PROD --env.DEBUG=0 && node lib/copy.js --config copy",
+    "production": "node lib/clear.js --dist && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=PROD --env.DEBUG=0 && node lib/concat.js --config concat",
+    "server": "node lib/server.js --dev",
+    "server-prod": "node lib/server.js --prod"
   },
   "keywords": [
     "webpack",
@@ -41,7 +43,7 @@
     "fs-extra": "^5.0.0",
     "html-minify-loader": "^1.3.0",
     "json-loader": "^0.5.7",
-    "less": "^2.7.3",
+    "less": "^3.0.0",
     "less-loader": "^4.0.5",
     "node-sass": "^4.7.2",
     "null-loader": "^0.1.1",
@@ -50,7 +52,6 @@
     "preprocess-loader": "^0.2.2",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
-    "skeleton-loader": "^1.1.4",
     "style-loader": "^0.20.1",
     "ts-loader": "^3.5.0",
     "typescript": "2.7.x",
