@@ -2,9 +2,7 @@
 const path = require('path');
 const fse = require('fs-extra');
 const webpack = require('webpack');
-const WebpackOnBuildPlugin = require('on-build-webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const autoprefixer = require('autoprefixer');
 
 // Biblioteki własne:
