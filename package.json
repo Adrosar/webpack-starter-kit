@@ -1,18 +1,21 @@
 {
   "name": "webpack-starter-kit",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "",
   "main": "",
   "scripts": {
     "build": "node lib/clear.js --build && webpack --display-chunks --env.MIN=0 --env.ENV=DEV --env.DEBUG=0",
-    "minimize": "node lib/clear.js --build && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=DEV --env.DEBUG=0",
-    "watch": "node lib/clear.js --build && webpack --display-chunks --watch --cache --env.MIN=0 --env.ENV=DEV --env.DEBUG=1",
-    "clear": "node lib/clear.js --all",
+    "min": "node lib/clear.js --build && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=DEV --env.DEBUG=0",
+    "minimize": "npm run min",
+    "dist": "node lib/clear.js --dist && webpack --display-chunks --env.MIN=0 --env.ENV=PROD --env.DEBUG=0 && webpack --display-chunks --optimize-minimize --env.MIN=2 --env.ENV=PROD --env.DEBUG=0 && node lib/copy.js --config copy",
+    "distribute": "npm run dist",
+    "prod": "node lib/clear.js --dist && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=PROD --env.DEBUG=0 && node lib/concat.js --config concat",
+    "production": "npm run prod",
     "test": "node lib/clear.js --build && webpack --display-chunks --env.MIN=1 --env.ENV=TEST --env.DEBUG=0",
-    "distribute": "node lib/clear.js --dist && webpack --display-chunks --env.MIN=0 --env.ENV=PROD --env.DEBUG=0 && webpack --display-chunks --optimize-minimize --env.MIN=2 --env.ENV=PROD --env.DEBUG=0 && node lib/copy.js --config copy",
-    "production": "node lib/clear.js --dist && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=PROD --env.DEBUG=0 && node lib/concat.js --config concat",
     "server": "node lib/server.js --dev --port 60088",
-    "server-prod": "node lib/server.js --prod --port 60080"
+    "server:prod": "node lib/server.js --prod --port 60080",
+    "clear": "node lib/clear.js --all",
+    "watch": "node lib/clear.js --build && webpack --display-chunks --watch --cache --env.MIN=0 --env.ENV=DEV --env.DEBUG=1"
   },
   "keywords": [
     "webpack",

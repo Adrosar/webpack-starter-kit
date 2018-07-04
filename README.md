@@ -19,10 +19,10 @@
 
  1. Sklonuj repozytorium na dysk lub pobierz spakowaną paczkę.
  2. Otwórz terminal *(konsolę)* i wejdź do katalogu `webpack-starter-kit`
- 3. Uruchom polecenie `yarn install` jeżeli nie zrobiłeś tego wcześniej!
+ 3. Uruchom polecenie `npm install` lub `yarn install` jeżeli nie zrobiłeś tego wcześniej!
  4. Zbuduj aplikację poleceniem `yarn run build`
  5. Uruchom serwer deweloperski poleceniem `yarn run server`
- 6. W przeglądarce otwórz adres http://127.0.0.1:8080/album-1.html
+ 6. W przeglądarce otwórz adres http://127.0.0.1:60088/album-1.html
 
 
 ## Zadania
@@ -40,14 +40,20 @@ npm run <task>
 **Zalecam użycie menadżera YARN**
 
 ### Lista zadań:
+
+#### Budowanie:
 - `build` - Budowanie aplikacji do katalogu **build** w celu uruchomienia przy pomocy serwera deweloperskiego.
-- `minimize` - To samo co zadanie `build`, tylko że pliki są minimalizowane.
-- `distribute` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i skopiowanie z katalogu **assets** wszystkich plików (zostaną stworzone pliki w wersji deweloperskiej i zminimalizowanej z końcówkami typu `*.min.js`, itp)
-- `production` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i połączenie plików **JS/CSS** z katalogu **assets** w jeden plik `commons.js` i/lub `commons.css` (wszystkie pliki będą zminimalizowane, ale bez końcówek typu `*.min.js`, `*.min.css`) (lista plików do połączenia znajduje się w `/config.js`).
-- `clear` - Czyszczenie katalogów  **build** i **dist** z zawartości.
-- `server` - Serwer deweloperski dostępny pod adresem `http://127.0.0.1:8080`
-- `server-prod` - Serwer produkcyjny dostępny pod adresem `http://127.0.0.1:80`
+- `min` / `minimize` - To samo co zadanie `build`, tylko że pliki są minimalizowane.
+- `dist` / `distribute` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i skopiowanie z katalogu **assets** wszystkich plików (zostaną stworzone pliki w wersji deweloperskiej i zminimalizowanej z końcówkami typu `*.min.js`, itp)
+- `prod` / `production` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i połączenie plików **JS/CSS** z katalogu **assets** w jeden plik `commons.js` i/lub `commons.css` (wszystkie pliki będą zminimalizowane, ale bez końcówek typu `*.min.js`, `*.min.css`) (lista plików do połączenia znajduje się w `/config.js`).
 - `test` - Zbudowanie testów jednostkowych.
+
+#### Serwery:
+- `server` - Serwer deweloperski dostępny pod adresem `http://127.0.0.1:60088`
+- `server:prod` - Serwer produkcyjny dostępny pod adresem `http://127.0.0.1:60080`
+
+#### Narzędzia:
+- `clear` - Czyszczenie katalogów  **build** i **dist** z zawartości.
 - `watch` - Tryb interaktywny _(czuwaj i buduj)_.
 
 
@@ -71,8 +77,8 @@ Zaimplementowane testy są oparte o wyjątki: `throw new Error()` wywoływane, g
 
 Aby przetestować aplikację należy: 
 
- 1. Uruchomić serwer deweloperski `yarn run server`
- 2. Zbudować testy jednostkowe ze źródła `yarn run test`
- 3. Uruchomić w przeglądarce adres http://127.0.0.1:8080/test.html
+ 1. Zbudować testy jednostkowe ze źródła `npm run test`
+ 2. Uruchomić serwer deweloperski `npm run server`
+ 3. Uruchomić w przeglądarce adres http://127.0.0.1:60088/test.html
  4. Jeżeli w konsoli przeglądarki (F12) **nie** będzie błędu to znaczy iż test się powiódł :D
  5. W przypadku wystąpienia błędu lub wyjątku test nie został spełniony :(
