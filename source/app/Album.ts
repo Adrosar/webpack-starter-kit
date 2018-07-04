@@ -1,4 +1,4 @@
-import "./Album.css";
+import "../style/album.css";
 
 export class Album {
 

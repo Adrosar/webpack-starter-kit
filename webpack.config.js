@@ -52,6 +52,12 @@ function webpackConfigFactory(webpackEnv) {
 
     }
 
+    if (ENVAR.MIN > 0) {
+        babelLoaderObject.options.plugins = ["transform-minify-booleans", "transform-property-literals", "transform-regexp-constructors", "minify-replace", "minify-type-constructors", ["minify-mangle-names", {
+            keepFnName: true
+        }]]
+    }
+
 
     // Przypisanie ustawień `ts-loader` do stałej:
     // - https://github.com/TypeStrong/ts-loader
