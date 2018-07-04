@@ -320,6 +320,10 @@ function webpackConfigFactory(webpackEnv) {
         ]
     }
 
+    // Włączam generowanie "sourcemaps":
+    if (ENVAR.ENV === "DEV") {
+        webpackConfig.devtool = 'source-map';
+    }
 
     // Dla środowiska produkcyjnego ustawiam wyjściowy katalog na `/dist`:
     if (ENVAR.ENV === "PROD") {
