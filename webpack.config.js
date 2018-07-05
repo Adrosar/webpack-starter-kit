@@ -321,7 +321,7 @@ function webpackConfigFactory(webpackEnv) {
     }
 
     // Włączam generowanie "sourcemaps":
-    if (ENVAR.ENV === "DEV") {
+    if (ENVAR.ENV === "DEV" && ENVAR.MIN === 0) {
         webpackConfig.devtool = 'source-map';
     }
 

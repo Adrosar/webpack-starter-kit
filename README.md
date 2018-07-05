@@ -1,17 +1,10 @@
 
-
 ## Instalacja
 
 1. Zainstaluj **Node.js**. Zalecam wersję z serii LTS **8.x.x** (npm **5.x.x**).
 2. Otwórz konsolę _(terminal)_ i przejdź do folderu projektu
-3. Zainstaluj menadżer pakietów [YARN](https://yarnpkg.com), poleceniem:
-
-        npm install -g yarn
-
-4. Zainstaluj zależności z pliku **package.json**
-
-        yarn install
-
+3. Zainstaluj menadżer pakietów [YARN](https://yarnpkg.com), poleceniem: `npm install -g yarn`
+4. Zainstaluj zależności z pliku **package.json** poleceniem `yarn install`
 5. Gotowe :)
 
 
@@ -20,24 +13,16 @@
  1. Sklonuj repozytorium na dysk lub pobierz spakowaną paczkę.
  2. Otwórz terminal *(konsolę)* i wejdź do katalogu `webpack-starter-kit`
  3. Uruchom polecenie `npm install` lub `yarn install` jeżeli nie zrobiłeś tego wcześniej!
- 4. Zbuduj aplikację poleceniem `yarn run build`
- 5. Uruchom serwer deweloperski poleceniem `yarn run server`
+ 4. Zbuduj aplikację poleceniem `npm run build`
+ 5. Uruchom serwer deweloperski poleceniem `npm run server`
  6. W przeglądarce otwórz adres http://127.0.0.1:60088/album-1.html
 
 
 ## Zadania
 
-Wszystkie zadania należy uruchamiać poprzez składnię:
-
-```
-yarn run <task>
-```
-lub:
-```
-npm run <task>
-```
-
+Wszystkie zadania należy uruchamiać poprzez składnię: `npm run {{nazwa_zadania}}` lub `yarn run {{nazwa_zadania}}`
 **Zalecam użycie menadżera YARN**
+
 
 ### Lista zadań:
 
