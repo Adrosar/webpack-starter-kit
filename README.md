@@ -1,4 +1,7 @@
 
+
+# Czytaj TO !!!
+
 ## Instalacja
 
 1. Zainstaluj **Node.js**. Zalecam wersję z serii LTS **8.x.x** (npm **5.x.x**).
@@ -66,4 +69,4 @@ Aby przetestować aplikację należy:
  2. Uruchomić serwer deweloperski `npm run server`
  3. Uruchomić w przeglądarce adres http://127.0.0.1:60088/test.html
  4. Jeżeli w konsoli przeglądarki (F12) **nie** będzie błędu to znaczy iż test się powiódł :D
- 5. W przypadku wystąpienia błędu lub wyjątku test nie został spełniony :(
+ 5. W przypadku wystąpienia błędu lub wyjątku test nie został spełniony

@@ -53,6 +53,8 @@ function webpackConfigFactory(webpackEnv) {
     }
 
     if (ENVAR.MIN > 0) {
+        // Wtyczki mogą powodować błędy w kodzie wynikowym ze względu na przekształcenia, które wykonują na kodzie źródłowym.
+        // Dlatego jeżeli TWÓJ projekt się nie kompiluje to za-komentuj TĄ sekcję. 
         babelLoaderObject.options.plugins = ["transform-minify-booleans", "transform-property-literals", "transform-regexp-constructors", "minify-replace", "minify-type-constructors", ["minify-mangle-names", {
             keepFnName: true
         }]]
@@ -340,8 +342,9 @@ function webpackConfigFactory(webpackEnv) {
 
     // Optymalizacja i minimalizacja kodu:
     if (ENVAR.MIN > 0) {
-        // Dodaję wtyczkę `NoErrorsPlugin`:
-        webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
+
+        // Dodaję wtyczkę `NoEmitOnErrorsPlugin`:
+        webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 
         // Dodaję wtyczkę `OccurrenceOrderPlugin`:
         webpackConfig.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
