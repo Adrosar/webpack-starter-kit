@@ -1,7 +1,5 @@
-/docs
-
-/build/
-/dist/
-
-node_modules
-bower_components
+/build
+/dist
+/typedoc
+/node_modules
+/bower_components
