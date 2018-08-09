@@ -1,5 +1,7 @@
 
 
+
+
 # Czytaj TO !!!
 
 ## Instalacja
@@ -19,6 +21,11 @@
  4. Zbuduj aplikację poleceniem `npm run build`
  5. Uruchom serwer deweloperski poleceniem `npm run server`
  6. W przeglądarce otwórz adres http://127.0.0.1:60088/album-1.html
+
+**Wersja produkcyjna:**
+1. `npm run prod` lub `npm run dist`
+2. `npm run server:prod`
+3. http://127.0.0.1:60080/album-1.html
 
 
 ## Zadania
@@ -70,3 +77,8 @@ Aby przetestować aplikację należy:
  3. Uruchomić w przeglądarce adres http://127.0.0.1:60088/test.html
  4. Jeżeli w konsoli przeglądarki (F12) **nie** będzie błędu to znaczy iż test się powiódł :D
  5. W przypadku wystąpienia błędu lub wyjątku test nie został spełniony
+
+
+ ## Dokumentacja "TypeDoc"
+
+Dokumentacja jest generowana za każdym razem, gdy używasz polecenia `npm run dist` lub `npm run prod` i jest dostępna po uruchomieniu serwera `npm run server:prod` pod adresem [127.0.0.1:60080/~typedoc](http://127.0.0.1:60080/~typedoc) lub  [127.0.0.1:60088/~typedoc](http://127.0.0.1:60088/~typedoc) gdy uruchomisz serwer deweloperski `npm run server`
