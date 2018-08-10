@@ -47,8 +47,13 @@ Wszystkie zadania należy uruchamiać poprzez składnię: `npm run {{nazwa_zadan
 - `server` - Serwer deweloperski dostępny pod adresem `http://127.0.0.1:60088`
 - `server:prod` - Serwer produkcyjny dostępny pod adresem `http://127.0.0.1:60080`
 
+**UWAGA** - _Forki_ TEGO repozytorium mogą posiadać ustawione inne porty dla serwera deweloperskiego i produkcyjnego. W celu weryfikacji sprawdzić plik `/package.json`.
+
 #### Narzędzia:
-- `clear` - Czyszczenie katalogów  **build** i **dist** z zawartości.
+- `clear` - Czyszczenie katalogów  **build**, **dist** i **typedoc** z zawartości.
+- `typedoc` - Generowanie dokumentacji [TypeDoc](http://typedoc.org), która jest dostępna pod adresem:
+	- [127.0.0.1:60088/~typedoc](http://127.0.0.1:60088/~typedoc) (serwer deweloperski)
+	- [127.0.0.1:60080/~typedoc](http://127.0.0.1:60080/~typedoc) (serwer produkcyjny)
 - `watch` - Tryb interaktywny _(czuwaj i buduj)_.
 
 

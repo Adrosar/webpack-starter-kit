@@ -17,4 +17,5 @@ pipelines:
           - npm run min
           - npm run prod
           - npm run dist
+          - npm run typedoc
           - npm run clear

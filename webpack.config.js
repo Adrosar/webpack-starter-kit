@@ -1,9 +1,7 @@
 // Moduły:
 const path = require('path');
-const fse = require('fs-extra');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 // Biblioteki własne:
@@ -331,14 +329,6 @@ function webpackConfigFactory(webpackEnv) {
     // Dla środowiska produkcyjnego ustawiam wyjściowy katalog na `/dist`:
     if (ENVAR.ENV === "PROD") {
         webpackConfig.output.path = dir.dist
-        webpackConfig.plugins.push(new TypedocWebpackPlugin({
-            out: dir.typedoc,
-            module: 'commonjs',
-            target: 'es6',
-            exclude: '**/node_modules/**/*.*',
-            experimentalDecorators: true,
-            excludeExternals: true
-        }));
     }
 
     // Dla środowiska testowego ustawiam jako plik wejścia, plik z testami jednostkowymi:
