@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter-kit",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "scripts": {
     "build": "node lib/clear.js --build && webpack --display-chunks --env.MIN=0 --env.ENV=DEV --env.DEBUG=0",
     "min": "node lib/clear.js --build && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=DEV --env.DEBUG=0",
