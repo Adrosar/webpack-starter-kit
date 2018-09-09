@@ -14,7 +14,10 @@
     "server:prod": "node lib/server.js --prod --port 60080",
     "clear": "node lib/clear.js --all",
     "watch": "node lib/clear.js --build && webpack --display-chunks --watch --cache --env.MIN=0 --env.ENV=DEV --env.DEBUG=1",
-    "typedoc": "node lib/clear.js --typedoc && typedoc --options typedoc.config.js"
+    "typedoc": "node lib/clear.js --typedoc && typedoc --options typedoc.config.js",
+    "declaration": "node lib/clear.js --types && tsc -p tsconfig.json --allowJs false --declaration true --declarationDir ./build/@types --emitDeclarationOnly true",
+    "reinstall": "node lib/clear.js --nm && npm install",
+    "uninstall": "node lib/clear.js --all+nm"
   },
   "keywords": [
     "webpack",

@@ -8,7 +8,12 @@ const autoprefixer = require('autoprefixer');
 const dir = require('./lib/directories.js');
 const mergeEnv = require('./lib/mergeEnv.js');
 const nameResolve = require('./lib/nameResolve.js');
+const getPackageJSON = require('./lib/getPackageJSON.js')
 
+// Stałe:
+const packageJSON = getPackageJSON();
+
+// ...
 function webpackConfigFactory(webpackEnv) {
 
     // Odczyt i interpretacja zmiennych środowiskowych:
@@ -44,11 +49,15 @@ function webpackConfigFactory(webpackEnv) {
         loader: 'babel-loader',
         options: {
             presets: [
-                "es2015",
-                "stage-0"
-            ]
+                ["env", {
+                    "loose": true,
+                    "targets": {
+                        "browsers": ["last 3 versions", "safari >= 7", "ie >= 9"]
+                    }
+                }]
+            ],
+            plugins: []
         }
-
     }
 
     if (ENVAR.MIN > 0) {
@@ -161,7 +170,6 @@ function webpackConfigFactory(webpackEnv) {
                         test: /\.tsx?$/,
                         use: [
                             uglifyLoaderObject,
-                            babelLoaderObject,
                             tsLoaderObject,
                             preprocessLoaderObject
                         ]
