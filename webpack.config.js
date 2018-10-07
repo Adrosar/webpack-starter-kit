@@ -98,6 +98,38 @@ function webpackConfigFactory(webpackEnv) {
     }
 
 
+    // Przypisanie ustawień `skeleton-loader` do stałej: 
+    // - https://github.com/anseki/skeleton-loader
+    const skeletonLoaderObject = {
+        loader: 'skeleton-loader',
+        options: {
+            procedure: function (content) {
+
+                // Każda linia która kończy się poleceniem `//@DEL` zostaje usunięta
+                content = ("" + content).replace(/.+\/\/@DEL/gm, "");
+
+                if (ENVAR.ENV === "DEV") {
+                    // Składnia: `//@DEV xyz` wstawia do kodu `xyz` dla wersji DEV.
+                    content = ("" + content).replace(/\/\/@DEV\s+(.+)/gm, "$1");
+                }
+
+                if (ENVAR.ENV === "PROD") {
+                    // Składnia: `//@PROD xyz` wstawia do kodu `xyz` dla wersji PROD.
+                    content = ("" + content).replace(/\/\/@PROD\s+(.+)/gm, "$1");
+                }
+
+                if (ENVAR.DEBUG === true) {
+                    // Składnia: `//@DEBUG xyz` wstawia do kodu `xyz`,
+                    // jeżeli zmienna środowiskowa `DEBUG` jest ustawiona na `true`.
+                    content = ("" + content).replace(/\/\/@DEBUG\s+(.+)/gm, "$1");
+                }
+
+                return content;
+            }
+        }
+    }
+
+
     // Przypisanie ustawień `css-loader` do stałej: 
     // - https://github.com/webpack-contrib/css-loader
     const cssLoaderObject = {
@@ -166,153 +198,156 @@ function webpackConfigFactory(webpackEnv) {
                 Działa to odwrotnie niż reguły na liście `rules`. Reguły na liście `rules` są przetwarzane od końca do początku (z dołu w górę), a dopasowanie pliku do reguły nie przerywa działania "pętli", tylko wynik (po przetworzeniu treści pliku przez loader'y danej reguły) jest przekazywany do następnej pasującej reguły jako dane wejściowe.
                 */
                 oneOf: [{
-                        // TypeScript:
-                        test: /\.tsx?$/,
+                    // TypeScript:
+                    test: /\.tsx?$/,
+                    use: [
+                        uglifyLoaderObject,
+                        tsLoaderObject,
+                        preprocessLoaderObject,
+                        skeletonLoaderObject
+                    ]
+                },
+                {
+                    // Przetwarzanie pliku `config.js`:
+                    include: path.resolve(dir.source, "config.js"),
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: nameResolve('[name]', '[ext]', ENVAR)
+                        }
+                    },
+                        uglifyLoaderObject,
+                        preprocessLoaderObject
+                    ],
+                },
+                {
+                    // Wczytanie pliku o końcówce `.raw.js` jako zwykły plik tekstowy:
+                    test: /\.raw\.js$/,
+                    use: [{
+                        loader: 'raw-loader'
+                    },
+                        uglifyLoaderObject,
+                        babelLoaderObject,
+                        preprocessLoaderObject
+                    ]
+                },
+                {
+                    // JavaScript ( ES5 / ES2015 / ES6 ):
+                    test: /(\.es6\.js|\.es5\.js|\.js)$/,
+                    use: [
+                        uglifyLoaderObject,
+                        babelLoaderObject,
+                        preprocessLoaderObject,
+                        skeletonLoaderObject
+                    ],
+                },
+                {
+                    // Style CSS:
+                    test: /\.css$/,
+                    use: extractCSS.extract({
+                        fallback: "style-loader",
+                        use: [cssLoaderObject, postcssLoaderObject]
+                    }),
+                },
+                {
+                    // Style SASS:
+                    // - https://github.com/webpack-contrib/sass-loader
+                    test: /\.sass$/,
+                    use: extractCSS.extract({
+                        fallback: "style-loader",
                         use: [
-                            uglifyLoaderObject,
-                            tsLoaderObject,
-                            preprocessLoaderObject
-                        ]
-                    },
-                    {
-                        // Przetwarzanie pliku `config.js`:
-                        include: path.resolve(dir.source, "config.js"),
-                        use: [{
-                                loader: 'file-loader',
-                                options: {
-                                    name: nameResolve('[name]', '[ext]', ENVAR)
-                                }
-                            },
-                            uglifyLoaderObject,
-                            preprocessLoaderObject
-                        ],
-                    },
-                    {
-                        // Wczytanie pliku o końcówce `.raw.js` jako zwykły plik tekstowy:
-                        test: /\.raw\.js$/,
-                        use: [{
-                                loader: 'raw-loader'
-                            },
-                            uglifyLoaderObject,
-                            babelLoaderObject,
-                            preprocessLoaderObject
-                        ]
-                    },
-                    {
-                        // JavaScript ( ES5 / ES2015 / ES6 ):
-                        test: /(\.es6\.js|\.es5\.js|\.js)$/,
-                        use: [
-                            uglifyLoaderObject,
-                            babelLoaderObject,
-                            preprocessLoaderObject
-                        ],
-                    },
-                    {
-                        // Style CSS:
-                        test: /\.css$/,
-                        use: extractCSS.extract({
-                            fallback: "style-loader",
-                            use: [cssLoaderObject, postcssLoaderObject]
-                        }),
-                    },
-                    {
-                        // Style SASS:
-                        // - https://github.com/webpack-contrib/sass-loader
-                        test: /\.sass$/,
-                        use: extractCSS.extract({
-                            fallback: "style-loader",
-                            use: [
-                                cssLoaderObject,
-                                postcssLoaderObject,
-                                {
-                                    loader: "sass-loader?outputStyle=expanded&indentedSyntax"
-                                }
-                            ]
-                        })
-                    },
-                    {
-                        // Style SCSS:
-                        test: /\.scss$/,
-                        use: extractCSS.extract({
-                            fallback: "style-loader",
-                            use: [
-                                cssLoaderObject,
-                                postcssLoaderObject,
-                                {
-                                    loader: "sass-loader?outputStyle=expanded"
-                                }
-                            ]
-                        })
-                    },
-                    {
-                        // Style LESS:
-                        // - https://github.com/webpack-contrib/less-loader
-                        test: /\.less$/,
-                        use: extractCSS.extract({
-                            fallback: "style-loader",
-                            use: [
-                                cssLoaderObject,
-                                postcssLoaderObject,
-                                {
-                                    loader: "less-loader"
-                                }
-                            ]
-                        })
-                    },
-                    {
-                        // Obrazki jako Base64:
-                        // -https://www.npmjs.com/package/base64-image-loader
-                        test: /\.(jpg|png|gif)$/gm,
-                        loader: 'base64-image-loader'
-                    },
-                    {
-                        // JSON:
-                        // - https://github.com/webpack-contrib/json-loader
-                        test: /\.json$/,
-                        loader: 'json-loader'
-                    },
-                    {
-                        // XML:
-                        // - https://github.com/gisikw/xml-loader
-                        test: /\.xml$/,
-                        loader: 'xml-loader'
-                    },
-                    {
-                        // Kopiowanie plików HTML nie będących szablonami:
-                        test: /\.html$/,
-                        include: [path.resolve(dir.source, 'html')], // <- lista dodatkowych reguł, które muszą zostać spełnione
-                        use: [{
-                                loader: 'file-loader',
-                                options: {
-                                    name: nameResolve('[name]', 'html', ENVAR),
-                                    context: dir.source
-                                }
-                            },
+                            cssLoaderObject,
+                            postcssLoaderObject,
                             {
-                                loader: htmlMinifyLoaderStr
-                            },
-                            {
-                                loader: preprocessLoaderStr
+                                loader: "sass-loader?outputStyle=expanded&indentedSyntax"
                             }
                         ]
-                    },
-                    {
-                        // Wczytuję pliki jako surowe dane.
-                        // Są one przypisywane do zmiennej.
-                        // Przykład użycia: `var data = require("index.html")`
-                        // - https://github.com/webpack-contrib/raw-loader
-                        test: /\.(html|mustache|handlebars)?/,
-                        use: [{
-                                loader: 'raw-loader'
-                            },
+                    })
+                },
+                {
+                    // Style SCSS:
+                    test: /\.scss$/,
+                    use: extractCSS.extract({
+                        fallback: "style-loader",
+                        use: [
+                            cssLoaderObject,
+                            postcssLoaderObject,
                             {
-                                loader: htmlMinifyLoaderStr
-                            },
-                            {
-                                loader: preprocessLoaderStr
+                                loader: "sass-loader?outputStyle=expanded"
                             }
                         ]
+                    })
+                },
+                {
+                    // Style LESS:
+                    // - https://github.com/webpack-contrib/less-loader
+                    test: /\.less$/,
+                    use: extractCSS.extract({
+                        fallback: "style-loader",
+                        use: [
+                            cssLoaderObject,
+                            postcssLoaderObject,
+                            {
+                                loader: "less-loader"
+                            }
+                        ]
+                    })
+                },
+                {
+                    // Obrazki jako Base64:
+                    // -https://www.npmjs.com/package/base64-image-loader
+                    test: /\.(jpg|png|gif)$/gm,
+                    loader: 'base64-image-loader'
+                },
+                {
+                    // JSON:
+                    // - https://github.com/webpack-contrib/json-loader
+                    test: /\.json$/,
+                    loader: 'json-loader'
+                },
+                {
+                    // XML:
+                    // - https://github.com/gisikw/xml-loader
+                    test: /\.xml$/,
+                    loader: 'xml-loader'
+                },
+                {
+                    // Kopiowanie plików HTML nie będących szablonami:
+                    test: /\.html$/,
+                    include: [path.resolve(dir.source, 'html')], // <- lista dodatkowych reguł, które muszą zostać spełnione
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: nameResolve('[name]', 'html', ENVAR),
+                            context: dir.source
+                        }
+                    },
+                    {
+                        loader: htmlMinifyLoaderStr
+                    },
+                    {
+                        loader: preprocessLoaderStr
+                    },
+                        skeletonLoaderObject
+                    ]
+                },
+                {
+                    // Wczytuję pliki jako surowe dane.
+                    // Są one przypisywane do zmiennej.
+                    // Przykład użycia: `var data = require("index.html")`
+                    // - https://github.com/webpack-contrib/raw-loader
+                    test: /\.(html|mustache|handlebars)?/,
+                    use: [{
+                        loader: 'raw-loader'
+                    },
+                    {
+                        loader: htmlMinifyLoaderStr
+                    },
+                    {
+                        loader: preprocessLoaderStr
                     }
+                    ]
+                }
                 ]
             }]
         },

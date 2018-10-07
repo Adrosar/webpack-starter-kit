@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter-kit",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "scripts": {
     "build": "node lib/clear.js --build && webpack --display-chunks --env.MIN=0 --env.ENV=DEV --env.DEBUG=0",
     "min": "node lib/clear.js --build && webpack --display-chunks --optimize-minimize --env.MIN=1 --env.ENV=DEV --env.DEBUG=0",
@@ -32,7 +32,7 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@types/jquery": "^2.0.49",
+    "@types/jquery": "^2.0.51",
     "@types/node": "^8.9.5",
     "autoprefixer": "^7.2.6",
     "babel-core": "^6.26.3",
@@ -62,10 +62,11 @@
     "preprocess-loader": "^0.2.2",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.7",
+    "skeleton-loader": "^1.1.5",
     "style-loader": "^0.20.3",
     "ts-loader": "^3.5.0",
-    "typedoc": "^0.11.1",
-    "typescript": "^2.9.2",
+    "typedoc": "^0.12.0",
+    "typescript": "^3.0.3",
     "uglify-loader": "^2.0.0",
     "webpack": "^3.12.0",
     "xml-loader": "^1.2.1"
