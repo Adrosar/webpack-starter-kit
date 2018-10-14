@@ -1,6 +1,7 @@
-# Czytaj TO !!!
 
-## Instalacja
+# Webpack Starter Kit
+
+## Wymagania i instalacja
 
 1. Zainstaluj **Node.js**. Zalecam wersję z serii LTS **8.x.x** (npm **5.x.x**).
 2. Otwórz konsolę _(terminal)_ i przejdź do folderu projektu
@@ -13,7 +14,7 @@
 
  1. Sklonuj repozytorium na dysk lub pobierz spakowaną paczkę.
  2. Otwórz terminal *(konsolę)* i wejdź do katalogu `webpack-starter-kit`
- 3. Uruchom polecenie `npm install` lub `yarn install` jeżeli nie zrobiłeś tego wcześniej!
+ 3. Uruchom polecenie `npm install` lub `yarn install` _(zalecam użyć YARN'a)_ jeżeli nie zrobiłeś tego wcześniej!
  4. Zbuduj aplikację poleceniem `npm run build`
  5. Uruchom serwer deweloperski poleceniem `npm run server`
  6. W przeglądarce otwórz adres http://127.0.0.1:60088/album-1.html
@@ -34,38 +35,44 @@ Wszystkie zadania należy uruchamiać poprzez składnię: `npm run {{nazwa_zadan
 
 #### Budowanie:
 
-- `build` - Budowanie aplikacji do katalogu **build** w celu uruchomienia przy pomocy serwera deweloperskiego.
+- `build` - Buduje aplikację do katalogu **build** w celu uruchomienia przy pomocy serwera deweloperskiego.
 - `min` / `minimize` - To samo co zadanie `build`, tylko że pliki są minimalizowane.
-- `dist` / `distribute` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i skopiowanie z katalogu **assets** wszystkich plików (zostaną stworzone pliki w wersji deweloperskiej i zminimalizowanej z końcówkami typu `*.min.js`, itp)
-- `prod` / `production` - Zbudowanie aplikacji *(wersja produkcyjna)* do katalogu **dist** i połączenie plików **JS/CSS** z katalogu **assets** w jeden plik `commons.js` i/lub `commons.css` (wszystkie pliki będą zminimalizowane, ale bez końcówek typu `*.min.js`, `*.min.css`) (lista plików do połączenia znajduje się w `/config.js`).
-- `test` - Zbudowanie testów jednostkowych.
+- `dist` / `distribute`:
+	- Buduje aplikację do katalogu **dist** (tworzy pliki w wersji deweloperskiej i zminimalizowanej z końcówkami typu `*.min.js`, `*.min.css`).
+	- Kopiuje pliki i foldery z katalogu **assets** do katalogu **dist**.
+- `prod` / `production`:
+	- Buduje aplikację do katalogu **dist** (wszystkie pliki są minimalizowane).
+	- Łączy pliki `*.js` i `*.css` z katalogu **assets** w jeden plik `commons.js` i/lub `commons.css`.
+- `test` - Buduje testy jednostkowe.
 
 #### Serwery:
 
-- `server` - Serwer deweloperski dostępny pod adresem `http://127.0.0.1:60088`
-- `server:prod` - Serwer produkcyjny dostępny pod adresem `http://127.0.0.1:60080`
-
-**UWAGA** - _Forki_ TEGO repozytorium mogą posiadać ustawione inne porty dla serwera deweloperskiego i produkcyjnego. W celu weryfikacji sprawdzić plik `/package.json`.
+- `server` - Uruchamia serwer deweloperski, który jest dostępny pod adresem `http://127.0.0.1:60088`
+- `server:prod` - Uruchamia serwer produkcyjny, który jest dostępny pod adresem `http://127.0.0.1:60080`
 
 #### Narzędzia:
 
-- `clear` - Czyszczenie katalogów  **build**, **dist** i **typedoc** z zawartości.
-- `typedoc` - Generowanie dokumentacji [TypeDoc](http://typedoc.org), która jest dostępna pod adresem:
+- `clear` - Czyści katalogi **build**, **dist** i **typedoc** z zawartości.
+- `typedoc` - Generuje dokumentację [TypeDoc](http://typedoc.org), która jest dostępna pod adresem:
 	- [127.0.0.1:60088/~typedoc](http://127.0.0.1:60088/~typedoc) (serwer deweloperski)
 	- [127.0.0.1:60080/~typedoc](http://127.0.0.1:60080/~typedoc) (serwer produkcyjny)
-- `watch` - Tryb interaktywny _(czuwaj i buduj)_.
+- `watch` - Uruchamia interaktywny tryb _(czuwaj i buduj)_, który przebuduje aplikację, gdy jakiś plik zostanie zmieniony _(zapisany)_.
 
 
 ## Struktura projektu
 
-Foldery _(katalogii)_:
+Foldery _(katalogi)_:
 
 - `./assets` - Zasoby aplikacji, które **NIE** podlegają budowaniu _(kompilacji)_. Zawartość folderu **assets** jest kopiowana do folderu `./dist` podczas dystrybucji aplikacji.
 - `./build` - Zbudowane pliki aplikacji lub testów.
-- `./dist` - Pliki gotowe do dystrybucjii (np: skopiowania na serwer FTP).
-- `./lib` - Skrypty pomocnicze, np: _serwer deweloperski_.
-- `./node_modules` - Paczki z **NPM** i **YARN**.
-- `./source` - Źródło aplikacji.
+- `./dist` - Pliki gotowe do dystrybucji (np: skopiowania na serwer FTP).
+- `./lib` - Skrypty pomocnicze, np: serwer deweloperski, skrypt czyszczący katalogi, itp.
+- `./node_modules` - Folder z modułami _(paczkami)_ dla środowiska **Node.js**
+- `./source` - Pliki źródłowe, które składają się na aplikację.
+	- `./source/app` - Właściwa aplikacja (klasy, funkcje, obiekt).
+	- `./source/entry` - Punkt wejścia dla Webpack'a.
+	- `./source/html` - Szablony HTML.
+	- `./source/style` - Style CSS, SCSS, LESS, SASS.
 	- `./source/test` - Testy jednostkowe.
 - `./web` - pliki które **NIE** są używana w budowaniu ani dystrybucji aplikacji. Mogą to być przykłady użycia biblioteki, szablony JSON _(json mocks)_, itp.
 
