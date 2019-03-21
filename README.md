@@ -9,6 +9,12 @@
 4. Zainstaluj zależności z pliku **package.json** poleceniem `yarn install`
 5. Gotowe :)
 
+**UWAGA**
+
+Może się okazać że trzeba zainstalować pakiet [node-gyp](https://github.com/nodejs/node-gyp).
+Polecam wykonać wszystko jak jest opisane w pliku [README.md](https://github.com/nodejs/node-gyp/blob/master/README.md) z jednym wyjątkiem!
+Instalując **node-gyp** w systemie **Windows 10** zalecam użyć do instalacji **Visual C++ Build Tools** pliku `visualcppbuildtools_full.exe` _(~3.2 MB)_ z linku https://go.microsoft.com/fwlink/?LinkId=691126 _(trzeba wykonać instalację standardową - bez odznaczania składników)_.
+
 
 ## Uruchomienie przykładu
 
