@@ -52,7 +52,14 @@ function webpackConfigFactory(webpackEnv) {
                 ["env", {
                     "loose": true,
                     "targets": {
-                        "browsers": ["last 3 versions", "safari >= 7", "ie >= 9"]
+                        "browsers": [
+                            "Android >= 5",
+                            "iOS >= 7",
+                            "Firefox >= 45",
+                            "Explorer >= 9",
+                            "Opera >= 12",
+                            "last 2 years"
+                        ]
                     }
                 }]
             ],
@@ -202,6 +209,7 @@ function webpackConfigFactory(webpackEnv) {
                     test: /\.tsx?$/,
                     use: [
                         uglifyLoaderObject,
+                        babelLoaderObject,
                         tsLoaderObject,
                         preprocessLoaderObject,
                         skeletonLoaderObject
@@ -227,7 +235,6 @@ function webpackConfigFactory(webpackEnv) {
                         loader: 'raw-loader'
                     },
                         uglifyLoaderObject,
-                        babelLoaderObject,
                         preprocessLoaderObject
                     ]
                 },
