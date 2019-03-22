@@ -3,17 +3,21 @@
 
 ## Wymagania i instalacja
 
-1. Zainstaluj **Node.js**. Zalecam wersję z serii LTS **8.x.x** (npm **5.x.x**).
+1. Zainstaluj **Node.js**. Zalecam wersję z serii LTS **8.x.x** lub **10.x.x** _(npm >= **5.x.x**)_ .
 2. Otwórz konsolę _(terminal)_ i przejdź do folderu projektu
 3. Zainstaluj menadżer pakietów [YARN](https://yarnpkg.com), poleceniem: `npm install -g yarn`
 4. Zainstaluj zależności z pliku **package.json** poleceniem `yarn install`
 5. Gotowe :)
 
-**UWAGA**
+**UWAGA [1]**
 
 Może się okazać że trzeba zainstalować pakiet [node-gyp](https://github.com/nodejs/node-gyp).
-Polecam wykonać wszystko jak jest opisane w pliku [README.md](https://github.com/nodejs/node-gyp/blob/master/README.md) z jednym wyjątkiem!
-Instalując **node-gyp** w systemie **Windows 10** zalecam użyć do instalacji **Visual C++ Build Tools** pliku `visualcppbuildtools_full.exe` _(~3.2 MB)_ z linku https://go.microsoft.com/fwlink/?LinkId=691126 _(trzeba wykonać instalację standardową - bez odznaczania składników)_.
+Polecam wykonać wszystko co jest opisane w pliku [README.md](https://github.com/nodejs/node-gyp/blob/master/README.md) z jednym wyjątkiem!
+Instalując **Visual C++ Build Tools** w systemie **Windows 10** zalecam użyć do instalacji  pliku `visualcppbuildtools_full.exe` _(~3.2 MB)_ z linku https://go.microsoft.com/fwlink/?LinkId=691126 _(trzeba wykonać instalację standardową - bez odznaczania składników)_.
+
+**UWAGA [2]**
+
+W systemie **Windows 10** i **Linux Mint** zalecam używać menadżera **YARN** do instalacji pakietów. Instalując pakiety przy pomocy **npm** nieraz zdarza się, że nie wszystko zostało zainstalowane i podczas budowanie aplikacji pojawiają się _"dziwne"_ błędy.
 
 
 ## Uruchomienie przykładu

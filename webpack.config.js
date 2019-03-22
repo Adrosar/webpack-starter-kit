@@ -58,8 +58,7 @@ function webpackConfigFactory(webpackEnv) {
                             "Firefox >= 45",
                             "Explorer >= 9",
                             "Opera >= 12",
-                            "last 2 years",
-                            "dead"
+                            "last 2 years"
                         ]
                     }
                 }]
