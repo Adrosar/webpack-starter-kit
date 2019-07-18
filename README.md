@@ -19,6 +19,10 @@ Instalując **Visual C++ Build Tools** w systemie **Windows 10** zalecam użyć 
 
 W systemie **Windows 10** i **Linux Mint** zalecam używać menadżera **YARN** do instalacji pakietów. Instalując pakiety przy pomocy **npm** nieraz zdarza się, że nie wszystko zostało zainstalowane i podczas budowanie aplikacji pojawiają się _"dziwne"_ błędy.
 
+**UWAGA [3]**
+
+Jeżeli z jakiegoś powodu nie udaje Ci się zainstalować zależności to możesz pobrać gotową paczkę z [dysku Google](https://drive.google.com/open?id=1gfhYWpUEnx3A1tTbjqwIAC-q8KWLMfqN)
+
 
 ## Uruchomienie przykładu
 
