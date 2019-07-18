@@ -86,25 +86,6 @@ function webpackConfigFactory(webpackEnv) {
     }
 
 
-    // Uruchomienie `uglify-loader` w zależności od środowiska:
-    // - https://github.com/bestander/uglify-loader
-    var uglifyLoaderObject;
-
-    if (ENVAR.MIN > 0) {
-        uglifyLoaderObject = {
-            loader: 'uglify-loader',
-            options: {
-                unsafe: true,
-                mangle: true
-            }
-        }
-    } else {
-        uglifyLoaderObject = {
-            loader: 'do-nothing-loader'
-        }
-    }
-
-
     // Przypisanie ustawień `skeleton-loader` do stałej: 
     // - https://github.com/anseki/skeleton-loader
     const skeletonLoaderObject = {
@@ -208,7 +189,6 @@ function webpackConfigFactory(webpackEnv) {
                     // TypeScript:
                     test: /\.tsx?$/,
                     use: [
-                        uglifyLoaderObject,
                         babelLoaderObject,
                         tsLoaderObject,
                         preprocessLoaderObject,
@@ -224,7 +204,6 @@ function webpackConfigFactory(webpackEnv) {
                             name: nameResolve('[name]', '[ext]', ENVAR)
                         }
                     },
-                        uglifyLoaderObject,
                         preprocessLoaderObject
                     ],
                 },
@@ -234,7 +213,6 @@ function webpackConfigFactory(webpackEnv) {
                     use: [{
                         loader: 'raw-loader'
                     },
-                        uglifyLoaderObject,
                         preprocessLoaderObject
                     ]
                 },
@@ -242,7 +220,6 @@ function webpackConfigFactory(webpackEnv) {
                     // JavaScript ( ES5 / ES2015 / ES6 ):
                     test: /(\.es6\.js|\.es5\.js|\.js)$/,
                     use: [
-                        uglifyLoaderObject,
                         babelLoaderObject,
                         preprocessLoaderObject,
                         skeletonLoaderObject
