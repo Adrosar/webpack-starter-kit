@@ -3,39 +3,47 @@
         "outDir": "./dist/",
         "noImplicitAny": true,
         "strictNullChecks": true,
+        "strictPropertyInitialization": true,
         "noImplicitThis": true,
         "alwaysStrict": true,
         "strictFunctionTypes": true,
-        "strictPropertyInitialization": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "preserveConstEnums": false,
+        "forceConsistentCasingInFileNames": true,
+        "strictBindCallApply": true,
         "module": "esnext",
         "target": "es6",
         "jsx": "preserve",
         "allowJs": true,
+        "checkJs": true,
         "lib": [
             "scripthost",
             "dom",
+            "dom.iterable",
             "es5",
             "es6",
             "es7",
             "es2015",
             "es2016",
-            "es2017"
+            "es2017",
+            "esnext"
         ],
         "typeRoots": [
             "./node_modules/@types"
         ]
     },
     "include": [
-        "source/**/*"
+        "source/**/*.ts",
+        "source/**/*.js"
     ],
     "exclude": [
+        "source/**/*.d.ts",
         "node_modules",
         "bower_components",
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "**/*.spec.js"
     ]
 }
