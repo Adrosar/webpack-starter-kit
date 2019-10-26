@@ -1,6 +1,6 @@
 {
     "name": "webpack-starter-kit",
-    "version": "3.0.0-beta1",
+    "version": "3.0.0-beta2",
     "license": "MIT",
     "contributors": [
         {
@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "watch": "webpack --config webpack.config.js --mode development --watch",
-        "watch-reload": "webpack --config webpack.config.js --mode development --watch --liveReload",
+        "live": "webpack --config webpack.config.js --mode development --watch --liveReload",
         "build": "webpack --config webpack.config.js --mode development",
         "min": "webpack --config webpack.config.js --mode production --forDEV",
         "dist": "webpack --config webpack.config.js --mode production",
@@ -20,33 +20,34 @@
         "clear": "node ./lib/clear.js"
     },
     "devDependencies": {
-        "@babel/core": "~7.5.5",
-        "@babel/preset-env": "~7.5.5",
-        "autoprefixer": "~9.6.1",
-        "babel-loader": "~8.0.6",
-        "copy-webpack-plugin": "~5.0.3",
-        "css-loader": "~3.1.0",
-        "mini-css-extract-plugin": "~0.8.0",
-        "node-sass": "~4.12.0",
-        "optimize-css-assets-webpack-plugin": "~5.0.3",
-        "postcss-loader": "~3.0.0",
-        "preprocess-loader": "~0.3.0",
-        "raw-loader": "~2.0.0",
-        "sass-loader": "~7.1.0",
-        "style-loader": "~0.23.1",
-        "terser-webpack-plugin": "~1.3.0",
-        "ts-loader": "~6.0.4",
-        "typedoc": "~0.14.2",
-        "typescript": "~3.5.3",
+        "@babel/core": "^7.6.4",
+        "@babel/preset-env": "^7.6.3",
+        "autoprefixer": "^9.7.0",
+        "babel-loader": "^8.0.6",
+        "copy-webpack-plugin": "^5.0.4",
+        "css-loader": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.13.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "postcss-loader": "^3.0.0",
+        "preprocess-loader": "^0.3.0",
+        "raw-loader": "^2.0.0",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.0.0",
+        "terser-webpack-plugin": "^2.2.1",
+        "ts-loader": "^6.2.1",
+        "typedoc": "^0.15.0",
+        "typescript": "^3.6.4",
         "uglifycss": "0.0.29",
-        "webpack": "~4.36.1",
-        "webpack-cli": "~3.3.6",
-        "webpack-dev-server": "~3.7.2",
-        "webpack-livereload-plugin": "~2.2.0"
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.9.0",
+        "webpack-livereload-plugin": "^2.2.0"
     },
     "dependencies": {
-        "express": "~4.17.1",
-        "http-server": "~0.11.1",
-        "serve-index": "~1.9.1"
+        "express": "^4.17.1",
+        "http-server": "^0.11.1",
+        "nocache": "^2.1.0",
+        "serve-index": "^1.9.1"
     }
 }

@@ -62,7 +62,11 @@ const postcssLoaderObject = {
 
 //→ https://github.com/webpack-contrib/sass-loader
 const sassLoaderObject = {
-    loader: "sass-loader?outputStyle=expanded"
+    //loader: "sass-loader?outputStyle=expanded"
+    loader: "sass-loader",
+    options: {
+        webpackImporter: false
+    }
 }
 
 //→ https://github.com/dearrrfish/preprocess-loader
@@ -76,6 +80,7 @@ const preprocessLoaderObject = {
 
 const webpackConfig = {
     devtool: '(none)', //→ https://webpack.js.org/configuration/devtool/
+    target: 'web',
     entry: {
         "app": resolvePath('source/entry/app.ts')
     },
@@ -90,7 +95,7 @@ const webpackConfig = {
             // → https://webpack.js.org/guides/typescript/
             test: /\.tsx?$/,
             use: ['ts-loader', preprocessLoaderObject],
-            exclude: /node_modules/
+            exclude: /(node_modules|bower_components)/
         },
         {
             // → https://github.com/babel/babel-loader
