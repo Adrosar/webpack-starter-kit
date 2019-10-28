@@ -1,3 +1,4 @@
+// App:
 import initPublicPath from "../lib/initPublicPath";
 initPublicPath("App");
 console.log("Hello World!");

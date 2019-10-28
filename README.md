@@ -85,7 +85,6 @@ Foldery _(katalogi)_:
 - `./node_modules` - Folder z modułami _(paczkami)_ dla środowiska **Node.js**
 - `./source` - Pliki źródłowe, które składają się na aplikację.
 	- `./source/app` - Właściwa aplikacja (klasy, funkcje, obiekt).
-	- `./source/entry` - Punkt wejścia dla Webpack'a.
 	- `./source/html` - Szablony HTML.
 	- `./source/lib` - Biblioteki wewnętrzne projektu.
 	- `./source/style` - Style CSS, SCSS, LESS, SASS.

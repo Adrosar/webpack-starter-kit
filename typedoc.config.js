@@ -7,7 +7,6 @@ module.exports = {
     target: 'es5',
     exclude: [
         resolvePath('source/test', '**', '*'),
-        resolvePath('source/entry', '**', '*'),
         resolvePath('source/html', '**', '*'),
         resolvePath('source/style', '**', '*'),
         resolvePath('source/resources', '**', '*'),

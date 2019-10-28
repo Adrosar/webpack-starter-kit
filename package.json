@@ -1,6 +1,6 @@
 {
     "name": "webpack-starter-kit",
-    "version": "3.0.0-beta2",
+    "version": "3.0.0-beta3",
     "license": "MIT",
     "contributors": [
         {
@@ -14,14 +14,19 @@
         "build": "webpack --config webpack.config.js --mode development",
         "min": "webpack --config webpack.config.js --mode production --forDEV",
         "dist": "webpack --config webpack.config.js --mode production",
-        "dev": "webpack-dev-server --forDEV",
+        "dev": "webpack-dev-server --forDEV --disableNodeJs",
         "server": "node ./lib/server.js --port 8080",
         "typedoc": "typedoc --options typedoc.config.js",
         "clear": "node ./lib/clear.js"
     },
+    "engines": {
+        "node": "10.x.x"
+    },
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "@babel/preset-env": "^7.6.3",
+        "@types/express": "^4.17.1",
+        "@types/node": "^10.15.3",
         "autoprefixer": "^9.7.0",
         "babel-loader": "^8.0.6",
         "copy-webpack-plugin": "^5.0.4",
@@ -38,11 +43,12 @@
         "ts-loader": "^6.2.1",
         "typedoc": "^0.15.0",
         "typescript": "^3.6.4",
-        "uglifycss": "0.0.29",
+        "uglifycss": "^0.0.29",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.9",
         "webpack-dev-server": "^3.9.0",
-        "webpack-livereload-plugin": "^2.2.0"
+        "webpack-livereload-plugin": "^2.2.0",
+        "webpack-node-externals": "^1.7.2"
     },
     "dependencies": {
         "express": "^4.17.1",

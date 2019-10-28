@@ -40,9 +40,8 @@
         "source/**/*.js"
     ],
     "exclude": [
-        "source/**/*.d.ts",
         "node_modules",
-        "bower_components",
+        "source/**/*.d.ts",
         "**/*.spec.ts",
         "**/*.spec.js"
     ]
