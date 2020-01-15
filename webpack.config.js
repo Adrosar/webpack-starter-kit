@@ -1,9 +1,9 @@
 const os = require('os');
 
-const processArgv = require('./lib/processArgv');
-const resolvePath = require('./lib/resolvePath');
-const packageObject = require('./lib/packageObject');
-const distName = require('./lib/distName');
+const processArgv = require('./tools/processArgv');
+const resolvePath = require('./tools/resolvePath');
+const packageObject = require('./tools/packageObject');
+const distName = require('./tools/distName');
 
 console.log("\n# Name:", packageObject.name);
 console.log("# Version:", packageObject.version);

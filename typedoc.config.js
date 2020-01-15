@@ -1,4 +1,4 @@
-const resolvePath = require('./lib/resolvePath');
+const resolvePath = require('./tools/resolvePath');
 
 module.exports = {
     out: resolvePath('docs'),

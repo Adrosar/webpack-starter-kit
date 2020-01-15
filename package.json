@@ -15,9 +15,9 @@
         "min": "webpack --config webpack.config.js --mode production --forDEV",
         "dist": "webpack --config webpack.config.js --mode production",
         "dev": "webpack-dev-server --forDEV --disableNodeJs",
-        "server": "node ./lib/server.js --port 8080",
+        "server": "node ./tools/server.js --port 8080",
         "typedoc": "typedoc --options typedoc.config.js",
-        "clear": "node ./lib/clear.js"
+        "clear": "node ./tools/clear.js"
     },
     "engines": {
         "node": "10.x.x"
