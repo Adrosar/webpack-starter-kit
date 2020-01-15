@@ -150,7 +150,7 @@ const webpackConfigForNodeJs = {
 }
 
 const webpackConfigForWeb = {
-    devtool: '(none)', //→ https://webpack.js.org/configuration/devtool/
+    devtool: undefined, //→ https://webpack.js.org/configuration/devtool/
     target: 'web',
     entry: {
         // ↓ Kod JS/TS dla fornt-end-u i style SCSS.

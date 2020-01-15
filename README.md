@@ -61,8 +61,8 @@ npm run _NAZWA_ZADANIA_
 - `clear` Usuwa foldery _(katalogi)_: **dist** i **docs**.
 - `typedoc` - Generuje dokumentację [TypeDoc](http://typedoc.org) która jest dostępna pod adresem [127.0.0.1:8080/docs](http://127.0.0.1:8080/docs)
 - `watch` - Uruchamia interaktywny tryb _(czuwaj i buduj)_, który przebuduje aplikację, gdy jakiś plik zostanie zmieniony _(zapisany)_.
-- `watch-reload` - To samo co wyżej ↑ ale aplikacja jest automatycznie przeładowywana w przeglądarce.
-- `dev` - Uruchamia **webpack-dev-server** który działa jak połączenie poleceń `watch-reload` i `server` z tą różnica że pliki są budowane w pamięci RAM, a nie do katalogu **dist**.
+- `live` - To samo co wyżej ↑ ale aplikacja jest automatycznie przeładowywana w przeglądarce.
+- `dev` - Uruchamia **webpack-dev-server** który działa jak połączenie poleceń `live` i `server` z tą różnica że pliki są budowane w pamięci RAM, a nie do katalogu **dist**.
 
 #### Plik `require.cmd`
 
