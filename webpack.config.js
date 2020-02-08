@@ -14,6 +14,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const sass = require('sass');
+const fiber = require('fibers');
 
 // → https://github.com/webpack-contrib/mini-css-extract-plugin
 const cssExtractPlugin = new MiniCssExtractPlugin({
@@ -63,10 +65,13 @@ const postcssLoaderObject = {
 
 //→ https://github.com/webpack-contrib/sass-loader
 const sassLoaderObject = {
-    //loader: "sass-loader?outputStyle=expanded"
-    loader: "sass-loader",
+    loader: 'sass-loader',
     options: {
-        webpackImporter: false
+        sourceMap: false,
+        implementation: sass,
+        sassOptions: {
+            fiber: fiber
+        }
     }
 }
 
