@@ -1,5 +1,10 @@
+# Foldery
 /build
 /dist
 /typedoc
+/docs
 /node_modules
 /bower_components
+
+# Dopasowania:
+.DS_Store
