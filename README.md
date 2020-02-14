@@ -1,32 +1,34 @@
 
 # Webpack Starter Kit
 
-## Wymagania i instalacja
+## # Wymagania i instalacja
 
-1. Zainstaluj **Node.js** - zalecam wersję z serii LTS **8.x.x** lub **10.x.x**.
-2. Zainstaluj **npm** wersję **5.x.x** lub nowszą.
-3. Otwórz konsolę _(terminal)_ i przejdź do folderu projektu
-4. Zainstaluj zależności z pliku **package.json** poleceniem `npm install`
+1. Zainstaluj **[Node.js](https://nodejs.org)**.
+	- Zalecam wersję z serii LTS → **8.x.x**, **10.x.x** lub **12.x.x**.
+	- [Link do wszystkich wersji.](https://nodejs.org/dist/)
+2. Zainstaluj **npm** w wersji **5.x.x** lub nowszej.
+	- W systemie "Windows 10" **npm** instaluje się razem z **Node.js**
+3. Otwórz konsolę _(terminal)_ i przejdź do folderu projektu.
+4. Zainstaluj zależności z pliku **package.json** poleceniem `npm install`.
 5. Gotowe :)
 
-Alternatywnie do zainstalowania zależności możesz użyć menadżera [YARN](https://yarnpkg.com) → polecenie `yarn install`
 
-**§ UWAGA [1]**
+**⚠ UWAGA §1**
 
 Może się okazać że trzeba zainstalować pakiet [node-gyp](https://github.com/nodejs/node-gyp).
 Polecam wykonać wszystko co jest opisane w pliku [README.md](https://github.com/nodejs/node-gyp/blob/master/README.md) z jednym wyjątkiem!
 Instalując **Visual C++ Build Tools** w systemie **Windows 10** zalecam użyć do instalacji  pliku `visualcppbuildtools_full.exe` _(~3.2 MB)_ z linku https://go.microsoft.com/fwlink/?LinkId=691126 _(trzeba wykonać instalację standardową - bez odznaczania składników)_.
 
-**§ UWAGA [2]**
+**⚠ UWAGA §2**
 
-Może się zdarzyć że menadżer **npm** nie zainstaluje poprawnie wszystkich zależności wtedy zalecam użyć menadżera [YARN](https://yarnpkg.com) do instalacji pakietów. 
+Może się zdarzyć że menadżer **npm** nie zainstaluje poprawnie wszystkich zależności wtedy zalecam użyć menadżera [YARN](https://yarnpkg.com) do instalacji pakietów → polecenie `yarn install`.
 
-**§ UWAGA [3]**
+**⚠ UWAGA §3**
 
 Jeżeli z jakiegoś powodu nie udaje Ci się zainstalować zależności to możesz pobrać gotową paczkę z [dysku Google](https://drive.google.com/open?id=1gfhYWpUEnx3A1tTbjqwIAC-q8KWLMfqN) _(odpowiednią dla swojego sytemu operacyjnego)_.
 
 
-## Uruchomienie przykładu
+## # Uruchomienie przykładu
 
  1. Sklonuj repozytorium na dysk lub pobierz spakowaną paczkę.
  2. Otwórz terminal *(konsolę)* i wejdź do katalogu `webpack-starter-kit`
@@ -36,7 +38,7 @@ Jeżeli z jakiegoś powodu nie udaje Ci się zainstalować zależności to może
  6. W przeglądarce otwórz adres http://127.0.0.1:8080/web/preview.html
 
 
-## Zadania
+## # Zadania
 
 Wszystkie zadania należy uruchamiać poprzez składnię:
 
@@ -44,7 +46,7 @@ Wszystkie zadania należy uruchamiać poprzez składnię:
 npm run _NAZWA_ZADANIA_
 ```
 
-### Lista zadań:
+### ☰ Lista zadań:
 
 #### Budowanie:
 
@@ -64,26 +66,25 @@ npm run _NAZWA_ZADANIA_
 - `live` - To samo co wyżej ↑ ale aplikacja jest automatycznie przeładowywana w przeglądarce.
 - `dev` - Uruchamia **webpack-dev-server** który działa jak połączenie poleceń `live` i `server` z tą różnica że pliki są budowane w pamięci RAM, a nie do katalogu **dist**.
 
-#### Plik `require.cmd`
+### ☰ Skrypty:
 
-Instaluje na nowo wszystkie pakiety. Trzeba wpierw usunąć z pliku `./package.json` sekcję **devDependencies** i **dependencies**.
+✤ Skrypt `./requirements.cmd` służy do aktualizacji zależności.
 
-Do użycia tylko w CMD (Windows):
+ 1. Usuń folder `./node_modules`.
+ 2. Usuń plik `./package-lock.json`.
+ 3. Z pliku `./package.json` skasuj sekcje **devDependencies** i **dependencies**.
+ 4. Uruchom plik `./requirements.cmd`
 
-```
-./require.cmd
-```
 
-
-## Struktura projektu
+## # Struktura projektu
 
 Foldery _(katalogi)_:
 
 - `./assets` - Zasoby aplikacji, które **NIE** podlegają budowaniu _(kompilacji)_. Zawartość folderu **assets** jest kopiowana do folderu `./dist` podczas dystrybucji aplikacji.
-- `./dist` - Wygenerowane pliki aplikacji w wersji developerskiej lub produkcyjnej.
-- `./lib` - Skrypty pomocnicze, np: serwer deweloperski, skrypt czyszczący katalogi, itp.
-- `./node_modules` - Folder z modułami _(paczkami)_ dla środowiska **Node.js**
-- `./source` - Pliki źródłowe, które składają się na aplikację.
+- `./dist` - Zawiera wygenerowane pliki w wersji developerskiej lub produkcyjnej.
+- `./tools` - Skrypty pomocnicze, np: serwer deweloperski, skrypt czyszczący katalogi, itp.
+- `./node_modules` - Folder z paczkami dla środowiska **Node.js**
+- `./source` - Pliki źródłowe:
 	- `./source/app` - Właściwa aplikacja (klasy, funkcje, obiekt).
 	- `./source/html` - Szablony HTML.
 	- `./source/lib` - Biblioteki wewnętrzne projektu.
@@ -92,7 +93,7 @@ Foldery _(katalogi)_:
 - `./web` - pliki które **NIE** są używana w budowaniu ani dystrybucji aplikacji. Mogą to być: przykłady użycia biblioteki, szablony JSON _(json mocks)_, podgląd aplikacji _(preview.html)_, itp.
 
 
-### Struktura generowanej aplikacji
+### ☶ Struktura generowanej aplikacji
 
 Aplikacja w wersji produkcyjnej jest generowana do katalogu _(folderu)_:
 
@@ -106,3 +107,4 @@ Aplikacja w wersji developerskiej jest generowana do katalogu _(folderu)_:
 
  - `_NAZWA_` - Nazwa aplikacji zdefiniowana w pliku `./package.json`, pole **name**
  - `_WERSJA_` - Wersja aplikacji zdefiniowana w pliku `./package.json`, pole **version**
+ 
